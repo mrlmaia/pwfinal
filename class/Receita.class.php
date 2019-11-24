@@ -5,10 +5,7 @@
         private  $id;
         private  $nome;
         private  $rendimento;
-<<<<<<< HEAD
         private $ingredientes;
-=======
->>>>>>> 6e583d6e513433204583c84db984debc2788725c
         
         function __construct($nome, $rendimento) {
             $this->setId(0);
@@ -23,11 +20,7 @@
         }
 
         function setId(int $id){
-<<<<<<< HEAD
-            $this->id = $id;
-=======
             $this->id = intval($id);
->>>>>>> 6e583d6e513433204583c84db984debc2788725c
         }
 
         function getnome(){
@@ -46,7 +39,6 @@
             $this->rendimento = intval($rendimento);
         }
 
-<<<<<<< HEAD
 
         public function getIngredientes()
         {
@@ -56,11 +48,6 @@
         public function setIngredientes($ingredientes)
         {
                 $this->ingredientes = $ingredientes;
-=======
-        public function setAllIngredientes($ingredientes)
-        {
-            # code...
->>>>>>> 6e583d6e513433204583c84db984debc2788725c
         }
 	}
 ?>

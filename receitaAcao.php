@@ -36,11 +36,7 @@ function salvar()
 		if($situacao){
 			echo "<script>alert('Registro salvo com sucesso!'); location.href='receitaTabela.php';</script>"; 
 		}else{
-<<<<<<< HEAD
-			#echo "<script>alert('Erro ao salvar o registro'); location.href='receitaTabela.php';</script>"; 	
-=======
 			echo "<script>alert('Erro ao salvar o registro'); location.href='receitaTabela.php';</script>"; 	
->>>>>>> 6e583d6e513433204583c84db984debc2788725c
 		}	
 	}
 }

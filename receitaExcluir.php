@@ -5,11 +5,7 @@
 	}
 	
 	$id = $_GET["id"];
-<<<<<<< HEAD
 	$receitaDAO = new ReceitaDAO();
-=======
-	$receitaDAO = new receitaDAO();
->>>>>>> 6e583d6e513433204583c84db984debc2788725c
 	$situacao = $receitaDAO->excluir(intval($id));
 		
 	if($situacao){

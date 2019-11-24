@@ -7,11 +7,7 @@ class ReceitaDAO extends CrudDAO{
 	public function inserir($receita){
 		$criterios = array(
 			"nome" => $receita->getNome(),
-<<<<<<< HEAD
 			"rendimento" => $receita->getRendimento()
-=======
-			"rendimeto" => $receita->getRendimento()
->>>>>>> 6e583d6e513433204583c84db984debc2788725c
 		);
 		$sql = "INSERT INTO $this->table(nome, rendimento) VALUES(:nome, :rendimento)";
 		$situacao = parent::__inserir($sql, $criterios, $receita);
@@ -33,10 +29,6 @@ class ReceitaDAO extends CrudDAO{
 		$situacao = false;
 		try {
 			$sql = "DELETE FROM $this->table WHERE id = :id";
-<<<<<<< HEAD
-			echo $sql ."id:".$id;
-=======
->>>>>>> 6e583d6e513433204583c84db984debc2788725c
 			$situacao = parent::__excluir($sql, $id);
 			
 		} catch (PDOException $erro) {
@@ -83,7 +75,6 @@ class ReceitaDAO extends CrudDAO{
 		$receita->setRendimento($registro['rendimento']);
 		return $receita;
 	}
-<<<<<<< HEAD
 	public function adicionarIngrediente($idReceita, $idIngrediente, $qtdIngrediente){
 		// verficar se existe esse ingrediente na receita
 		//		se sim adiciono a qtd
@@ -124,7 +115,5 @@ class ReceitaDAO extends CrudDAO{
 		}
 		return false;
 	}
-=======
->>>>>>> 6e583d6e513433204583c84db984debc2788725c
 }
 ?> 

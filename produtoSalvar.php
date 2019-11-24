@@ -19,9 +19,9 @@
 	}
 
 	if($situacao){
-		echo "<script>alert('Produto cadastrado'); location.href='ProdutoTabela.php';</script>"; 
+		echo "<script>alert('Produto cadastrado'); location.href='produtoTabela.php';</script>"; 
 	}else{
-		echo "<script>alert('Erro ao salvar o produto'); location.href='ProdutoTabela.php';</script>"; 	
+		echo "<script>alert('Erro ao salvar o produto'); location.href='produtoTabela.php';</script>"; 	
 	}	
 	
 			
