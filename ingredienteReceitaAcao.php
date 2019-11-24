@@ -12,9 +12,9 @@
 	$receitaDAO = new ReceitaDAO();
 	$situacao = $receitaDAO->adicionarIngrediente(intval($idReceita),intval($idIngrediente), $_POST["quantidadeIngrediente"]);
 	if ($situacao) {
-		echo "<script>alert('Ingrediente adicionado com sucesso!');<script>"; 
+		echo "<script>alert('Ingrediente adicionado com sucesso!'); location.href='ingredienteReceitaFormulario.php?id={$idReceita}';</script>"; 
 	} else {
-		echo "<script>alert('Falaha ao adicionar ingrediente!');<script>";
+		echo "<script>alert('Falha ao adicionar ingrediente!'); location.href='ingredienteReceitaFormulario.php?id={$idReceita}';</script>"; 
+	
 	}
-	echo "location.href='ingredienteReceitaFormulario.php?id=$idReceita';</script>";
 ?>

@@ -88,11 +88,13 @@ class ReceitaDAO extends CrudDAO{
 					"qtdIngrediente" => $qtdIngrediente
 				);
 				$sql = "INSERT INTO TbReceitaIngrediente values(:id1,:id2,:qtdIngrediente)";
-				echo $sql . $criterios["id1"] . $criterios["id2"];
 				$situacao = parent::__adicionaNN($sql, $criterios);
 			}
 		} catch (PDOException $erro) {
 			parent::gerarLog($erro);
+		}
+		if ($situacao) {
+			echo "true";
 		}
 		return $situacao;
 	}
