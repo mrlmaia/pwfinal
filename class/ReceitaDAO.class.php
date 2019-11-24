@@ -53,7 +53,7 @@ class ReceitaDAO extends CrudDAO{
 	public function listarEssesIngredientes(Receita $receita){
 		$ingredientes = null;
 		$id = $receita->getId();
-		$sql = "select r.id, r.nome, i.id, i.nome, qtdIngrediente as qtd from TbReceita r, TbReceitaIngrediente ri, TbIngrediente i where r.id = ri.idReceita and i.id = ri.idIngrediente and r.id = :id";
+		$sql = "SELECT r.id, r.nome, i.id, i.nome, qtdIngrediente as qtd from TbReceita r, TbReceitaIngrediente ri, TbIngrediente i where r.id = ri.idReceita and i.id = ri.idIngrediente and r.id = :id";
 		$registros = parent::__listarEspecifico($sql, $id);
 		$ingredienteDAO = new IngredienteDAO();
 		
@@ -114,6 +114,11 @@ class ReceitaDAO extends CrudDAO{
 			return true;
 		}
 		return false;
+	}
+
+	public function getUltimoId(){
+		$LAST_ID = parent::lastInsertId();
+		return $LAST_ID;
 	}
 }
 ?> 

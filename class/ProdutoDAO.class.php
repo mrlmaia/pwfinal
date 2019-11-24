@@ -17,7 +17,7 @@ class ProdutoDAO extends CrudDAO{
 		return $situacao;
 	}
 
-	public function atualizar($produto){
+	public function atualizar(Produto $produto, int $idReceita = null){
 		$criterios = array(
 			"nome" => $produto->getNome(),
 			"precoVenda" => $produto->getPrecoVenda(),
@@ -26,6 +26,9 @@ class ProdutoDAO extends CrudDAO{
 		);
 		$sql = "UPDATE $this->table SET nome = :nome, precoVenda =:precoVenda, quantidade =:quantidade WHERE id = :id";
 		$situacao = parent::__atualizar($sql, $criterios);
+		if ($idReceita != null && $situacao) {
+			$this->adicionarReceita($produto->getId(), $idReceita);
+		}
 		return $situacao;
 	}
 
@@ -95,6 +98,16 @@ class ProdutoDAO extends CrudDAO{
 			$produtos[] = $produto;
 		}
 		return $produtos;
+	}
+	public function adicionarReceita($idProduto, $idReceita)
+	{
+		$criterios = array(
+			"idReceita" => $idReceita,
+			"id" => $idProduto
+		);
+		$sql = "UPDATE $this->table SET idReceita = :idReceita WHERE id = :id";
+		$situacao = parent::__atualizar($sql, $criterios);
+		return $situacao;
 	}
 }
 ?> 

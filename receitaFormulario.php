@@ -51,8 +51,8 @@
             <input type="text" class="form-control" name="rendimento" id="rendimento" value="<?php if ($id!=0) {echo $rendimento;}?>" aria-describedby="helpId" placeholder="Informe o preco do ingrediente">
           </div>							
           <div class="col-md-4">
-            <label for="ingredientes">Ingredientes</label>
-              <select class="form-control" id="ingrediente" name="ingrediente">
+            <label for="produto">Produto</label>
+              <select class="form-control" id="produto" name="produto">
                 <?php 
                   if (isset($produtosDisponiveis)):	
                     foreach($produtosDisponiveis as $key => $registro): //input que passa o id do produto referente a receita?> 

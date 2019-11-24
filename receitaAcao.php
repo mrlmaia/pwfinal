@@ -26,9 +26,15 @@ function salvar()
 		$receita = new Receita($nome,$rendimento);
 		$receita->setId($id);
 		$receitaDAO = new ReceitaDAO();
-		
+		$idProduto = $_POST["produto"];
 		if($id == 0){
-			$situacao = $receitaDAO->inserir($receita);
+			// inserir a receita
+			// alterar o chupchup add a receita
+			$situacao = $receitaDAO->inserir($receita); 
+			if($situacao){
+				$produtoDAO = new ProdutoDAO();
+				$situacao =  $produtoDAO->adicionarReceita($idProduto,$receitaDAO->getUltimoId());
+			}
 		}else{
 			$situacao = $receitaDAO->atualizar($receita);
 		}
