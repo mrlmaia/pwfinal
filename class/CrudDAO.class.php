@@ -140,8 +140,13 @@
 				$situacao = TRUE;
 			}catch(PDOException $erro){
 				$this->gerarLog($erro);
-			}		
+			}	
 			return $situacao;	
+		}
+		public function getUltimoId(){
+			$conexao = $this->conectar();				
+			$LAST_ID = $conexao->lastInsertId();
+			return $LAST_ID;
 		}
 
 	}

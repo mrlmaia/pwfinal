@@ -3,8 +3,7 @@
     function __autoload($class_name){
         require_once 'class/' . $class_name .'.class.php';
     }
-    session_start();
-	$id = 0;
+    $id = 0;
 	$nomeReceita = "";
 	$precoCusto = 0;
 	$precoVenda = 0;
@@ -43,7 +42,7 @@
         require_once "menu.php"
     ?>
     <div class="container">
-        <form id="formulario" action="ingredientereceitaAcao.php" method="post" enctype="multipart/form-data">
+        <form id="formulario" action="ingredienteReceitaAcao.php" method="post" enctype="multipart/form-data">
             <fieldset>
                 <div class="row form-group">
                     <div class="col-md-6">
@@ -52,7 +51,6 @@
                         <label for="nome">Nome</label>  
                         <input class="form-control" id="nome" name="nome" value="<?php echo $nomeReceita?>" type="text" readonly>
                     </div>							
-                    			
                     <div class="col-md-6">
                         <label for="rendimento">Rendimento</label>
                         <input type="text" class="form-control"  name="rendimento" id="rendimento" value="<?php echo $rendimento?>" aria-describedby="helpId" readonly placeholder="Informe o preco do receitaa">
@@ -84,7 +82,7 @@
                         </div>
                     </div><!--// .panel -->
                 </div><!--// .col-md -->
-                <button id="btAdicionar" class="btn btn-primary" onclick="doPost('formulario', 'adicionar')">
+                <button id="btAdicionar" class="btn btn-primary">
                     Adicionar Ingrediente
                 </button>        
             </fieldset>

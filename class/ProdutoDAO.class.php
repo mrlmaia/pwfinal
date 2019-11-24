@@ -106,6 +106,7 @@ class ProdutoDAO extends CrudDAO{
 			"id" => $idProduto
 		);
 		$sql = "UPDATE $this->table SET idReceita = :idReceita WHERE id = :id";
+		echo $sql .$criterios["idReceita"]. $criterios["id"];
 		$situacao = parent::__atualizar($sql, $criterios);
 		return $situacao;
 	}

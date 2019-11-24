@@ -81,13 +81,14 @@ class ReceitaDAO extends CrudDAO{
 		//		se nao adiciono
 		$situacao = false;
 		try {
-			if($this->verificaIngrediente(intval($idIngrediente)) && $this->verificaIngredienteReceita($idIngrediente, $idReceita)){
+			if($this->verificaIngrediente(intval($idIngrediente)) && !$this->verificaIngredienteReceita($idIngrediente, $idReceita)){
 				$criterios = array(
 					"id1" => $idReceita,
 					"id2" => $idIngrediente,
 					"qtdIngrediente" => $qtdIngrediente
 				);
 				$sql = "INSERT INTO TbReceitaIngrediente values(:id1,:id2,:qtdIngrediente)";
+				echo $sql . $criterios["id1"] . $criterios["id2"];
 				$situacao = parent::__adicionaNN($sql, $criterios);
 			}
 		} catch (PDOException $erro) {
@@ -116,8 +117,19 @@ class ReceitaDAO extends CrudDAO{
 		return false;
 	}
 
+	public function listarEsseProduto($idReceita){
+		$sql = "SELECT * from TbProduto where idReceita = :idReceita";
+		$registro = parent::__listarEspecifico($sql,$idReceita);
+		$produtoDAO = new ProdutoDAO();
+		$produto = null;
+		if (isset($registro)) {
+			$produto = $produtoDAO->buscarPorId($registro['id']);
+		}
+		return $produto;
+	}
+
 	public function getUltimoId(){
-		$LAST_ID = parent::lastInsertId();
+		$LAST_ID = parent::getUltimoId();
 		return $LAST_ID;
 	}
 }

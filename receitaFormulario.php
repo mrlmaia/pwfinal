@@ -14,7 +14,7 @@
 		$id = $receita->getId();
 		$nome = $receita->getnome();
 		$rendimento = $receita->getRendimento();
-		
+		$esseProduto = $receitaDAO->listarEsseProduto($id);
   }
   $produtoDAO = new ProdutoDAO();
   $produtosDisponiveis = $produtoDAO->listarProdutosDisponiveis();
@@ -53,14 +53,13 @@
           <div class="col-md-4">
             <label for="produto">Produto</label>
               <select class="form-control" id="produto" name="produto">
-                <?php 
-                  if (isset($produtosDisponiveis)):	
+                <?php if (isset($produtosDisponiveis)):	
                     foreach($produtosDisponiveis as $key => $registro): //input que passa o id do produto referente a receita?> 
                       <option value="<?php echo $registro->getId()?>"> 
                         <?php echo $registro->getNome()?>
                       </option>
                     <?php endforeach;
-                  endif; 
+                  endif;
                 ?>
               </select>
           </div>				
