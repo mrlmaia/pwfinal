@@ -11,12 +11,14 @@
 	$rendimento = 0;
     $receita = null;
     $receitaDAO = new ReceitaDAO();	
-	if (isset($_GET["id"])) {
+	if (isset($_GET["id"]) && !empty($_GET["id"])) {
         $receita = $receitaDAO->buscarPorId($_GET["id"]);
 		$id = $receita->getId();
 		$nomeReceita = $receita->getNome();
         $rendimento = $receita->getRendimento();
         $_SESSION['ingredientes'] = $receitaDAO->listarEssesIngredientes($receita);
+    } else {
+        echo "<script>alert(\"Esse produto não contem receita\");location.href='produtoTabela.php';</script>";
     }
 
     $ingredienteDAO = new IngredienteDAO();

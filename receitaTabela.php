@@ -47,13 +47,8 @@
 							<td>
 								<td>
 									<a class='btn btn-secundary float-right' href='ingredienteReceitaFormulario.php?id=<?php echo $registro->getId()?>'>Ver receita</a>
-<<<<<<< HEAD
 									<a class='btn btn-success float-right' href='receitaFormulario.php?id=<?php echo $registro->getId()?>'>Editar</a> 
 									<a class='btn btn-danger float-right mx-1' href='receitaExcluir.php?id=<?php echo $registro->getId()?>'>Excluir</a> 
-=======
-									<a class='btn btn-success float-right' href='receitaFormulario.php?id=<?php $registro->getId()?>'>Editar</a> 
-									<a class='btn btn-danger float-right mx-1' href='receitaExcluir.php?id=<?php $registro->getId()?>'>Excluir</a> 
->>>>>>> 6e583d6e513433204583c84db984debc2788725c
 								</td>
 							</td>
 						</tr>

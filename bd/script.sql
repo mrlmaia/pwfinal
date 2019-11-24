@@ -1,3 +1,4 @@
+drop schema if exists `trabalhoFinalPW`;
 CREATE SCHEMA IF NOT EXISTS `trabalhoFinalPW` DEFAULT CHARACTER SET utf8 ;
 USE `trabalhoFinalPW` ;
 
@@ -38,9 +39,10 @@ CREATE TABLE if not exists `TbProduto` (
   foreign key (idReceita) references TbReceita(id) on delete set null
 );
 
-insert into TbProduto(nome, precoVenda, quantidade) values 
-('CC Chocolate', 2.5, 5), 
-('CC Morango', 2.5, 6);
+insert into TbProduto(nome, precoVenda, quantidade, idReceita) values 
+('CC Chocolate', 2.5, 5, 1), 
+('CC Morango', 2.5, 6, 2) 
+('CC Coco', 2.5, 3, null);
 
 drop table if exists TbReceitaIngrediente;
 create table if not exists TbReceitaIngrediente(
@@ -57,5 +59,6 @@ insert into TbReceitaIngrediente values
 (2,1,0.3),
 (2, 3, 0.25);
 
+select * from TbProduto
 -- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 -- select r.id, r.nome, i.id, i.nome, qtdIngrediente as qtd from TbReceita r, TbReceitaIngrediente ri, TbIngrediente i where r.id = ri.idReceita and i.id = ri.idIngrediente;

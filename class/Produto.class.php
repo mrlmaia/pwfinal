@@ -9,12 +9,12 @@
         private  $quantidade;
         private  $receita;
         
-        function __construct($nome, $precoVenda, $quantidade) {
+        function __construct($nome, $precoVenda, $quantidade, int $receita = null) {
             $this->setId(0);
             $this->setnome($nome);
             $this->setPrecoVenda($precoVenda);
             $this->setQuantidade($quantidade);
-            $this->setReceita(null); 
+            $this->setReceita($receita); 
         }
 
 		function __toString(){

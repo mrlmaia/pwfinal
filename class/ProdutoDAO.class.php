@@ -45,6 +45,7 @@ class ProdutoDAO extends CrudDAO{
 			$produto->setnome($registro['nome']);
 			$produto->setprecoVenda($registro['precoVenda']);
 			$produto->setQuantidade($registro['quantidade']);
+			$produto->setReceita($registro['idReceita']);
 			$produtos[] = $produto;
 		}
 		return $produtos;
@@ -79,6 +80,21 @@ class ProdutoDAO extends CrudDAO{
 		$produto->setPrecoVenda($registro['precoVenda']);
 		$produto->setQuantidade($registro['quantidade']);
 		return $produto;
+	}
+	public function listarProdutosDisponiveis(){
+		$produtos = null;
+		$sql = "SELECT * from $this->table where id not in(select p.id from TbProduto p inner join TbReceita r on p.IdReceita = r.id)";
+		$registros = parent::__listar($sql);
+		foreach ($registros as $registro){
+			$produto = new Produto(null,null,null);
+			$produto->setId($registro['id']);
+			$produto->setnome($registro['nome']);
+			$produto->setprecoVenda($registro['precoVenda']);
+			$produto->setQuantidade($registro['quantidade']);
+			$produto->setReceita($registro['idReceita']);
+			$produtos[] = $produto;
+		}
+		return $produtos;
 	}
 }
 ?> 

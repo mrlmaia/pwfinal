@@ -15,7 +15,9 @@
 		$nome = $receita->getnome();
 		$rendimento = $receita->getRendimento();
 		
-	}
+  }
+  $produtoDAO = new ProdutoDAO();
+  $produtosDisponiveis = $produtoDAO->listarProdutosDisponiveis();
 ?>
 
 <!doctype html>
@@ -37,16 +39,30 @@
     <form id="formulario" action="receitaAcao.php" method="post" enctype="multipart/form-data">
       <fieldset>
         <div class="row form-group">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <input type="hidden" id="action" name="action" />
             <input class="form-control" id="id" name="id" value="<?php echo $id?>" type="hidden">
             <label for="nome">Nome</label>  
             <input class="form-control" id="nome" name="nome" value="<?php if ($id!=0) {echo $nome;}?>" type="text" 
               placeholder="Informe o nome">
           </div>										
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label for="rendimento">Rendimento</label>
             <input type="text" class="form-control" name="rendimento" id="rendimento" value="<?php if ($id!=0) {echo $rendimento;}?>" aria-describedby="helpId" placeholder="Informe o preco do ingrediente">
+          </div>							
+          <div class="col-md-4">
+            <label for="ingredientes">Ingredientes</label>
+              <select class="form-control" id="ingrediente" name="ingrediente">
+                <?php 
+                  if (isset($produtosDisponiveis)):	
+                    foreach($produtosDisponiveis as $key => $registro): //input que passa o id do produto referente a receita?> 
+                      <option value="<?php echo $registro->getId()?>"> 
+                        <?php echo $registro->getNome()?>
+                      </option>
+                    <?php endforeach;
+                  endif; 
+                ?>
+              </select>
           </div>				
         </div>
         <div class="form-group">

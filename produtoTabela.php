@@ -54,7 +54,7 @@
                                 </td>
                                 <td>
                                     <td>
-                                        <a class='btn btn-secundary float-right' href='ingredienteProdutoFormulario.php?id=<?php echo $registro->getId()?>'>Ver receita</a> 
+                                        <a class='btn btn-secundary float-right' href='ingredienteReceitaFormulario.php?id=<?php echo $registro->getReceita()?>'>Ver receita</a> 
                                         <a class='btn btn-success float-right' href='produtoFormulario.php?id=<?php echo $registro->getId()?>'>Editar</a> 
                                         <a class='btn btn-danger float-right mx-1' href='produtoExcluir.php?id=<?php echo $registro->getId()?>'>Excluir</a> 
                                     </td>
