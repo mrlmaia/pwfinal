@@ -1,0 +1,8 @@
+# imagens png do banco
+/bd/*.png
+
+#roteiros
+/roteiros/
+
+#logs
+logErro.txt
