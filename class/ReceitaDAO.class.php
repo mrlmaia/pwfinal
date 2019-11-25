@@ -56,10 +56,11 @@ class ReceitaDAO extends CrudDAO{
 		$sql = "SELECT r.id, r.nome, i.id, i.nome, qtdIngrediente as qtd from TbReceita r, TbReceitaIngrediente ri, TbIngrediente i where r.id = ri.idReceita and i.id = ri.idIngrediente and r.id = :id";
 		$registros = parent::__listarEspecifico($sql, $id);
 		$ingredienteDAO = new IngredienteDAO();
-		
+		$receitaDAO = new ReceitaDAO();
 		if (isset($registros)) {
 			foreach ($registros as $registro){
 				$ingrediente = $ingredienteDAO->buscarPorId($registro['id']);
+				$ingrediente->setQuantidade($receitaDAO->getQuantidade($id, $ingrediente->getId()));
 				$ingredientes[] = $ingrediente;
 			}	
 		}
@@ -119,7 +120,7 @@ class ReceitaDAO extends CrudDAO{
 		return false;
 	}
 
-	public function listarEsseProduto($idReceita){
+	public function listarEsseProduto(int $idReceita){
 		$sql = "SELECT * from TbProduto where idReceita = :idReceita";
 		$registro = parent::__listarEspecifico($sql,$idReceita);
 		$produtoDAO = new ProdutoDAO();
@@ -133,6 +134,23 @@ class ReceitaDAO extends CrudDAO{
 	public function getUltimoId(){
 		$LAST_ID = parent::getUltimoId();
 		return $LAST_ID;
+	}
+
+	public function getQuantidade($idReceita, $idIngrediente){
+		
+		$sql = "SELECT r.id, r.nome, i.id, i.nome, qtdIngrediente as qtd from TbReceita r, TbReceitaIngrediente ri, TbIngrediente i where r.id = ri.idReceita and i.id = ri.idIngrediente and r.id = :id";
+		$registros = parent::__listarEspecifico($sql, $id);
+		$ingredienteDAO = new IngredienteDAO();
+		$receitaDAO = new ReceitaDAO();
+		if (isset($registros)) {
+			foreach ($registros as $registro){
+				$ingrediente = $ingredienteDAO->buscarPorId($registro['id']);
+				$ingrediente->setQuantidade($receitaDAO->getQuantidade($id, $ingrediente->getId()));
+				$ingredientes[] = $ingrediente;
+			}	
+		}
+		return $ingredientes;
+
 	}
 }
 ?> 

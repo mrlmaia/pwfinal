@@ -73,6 +73,33 @@ class ProdutoDAO extends CrudDAO{
 		}
 		return $ingredientes;
 	}
+	public function listarIngredientesQuantidades(Produto $produto){
+		
+		$ingredientesQtd = array();
+		$ingredienteQtd = array(
+			"ingrediente" => null,
+			"qtdIngrediente" => 0
+		);
+		try {	
+			$id = $produto->getId();
+			$sql = "SELECT i.id, qtdIngrediente from TbReceita r, TbReceitaIngrediente ri, TbIngrediente i where r.id = ri.idReceita and i.id = ri.idIngrediente and r.id = :id";
+			$registros = parent::__listarEspecifico($sql, $produto->getId);
+			$ingredienteDAO = new IngredienteDAO();
+
+			if (isset($registros)) {
+				foreach ($registros as $registro){
+					$ingredienteQtd["ingrediente"] = $ingredienteDAO->buscarPorId($registro['id']);
+					$ingredienteQtd["qtdIngrendiente"] = $registro['qtdIngrediente'];
+					$ingredientesQtd[] = $ingredienteQtd;
+				}	
+			}
+		} catch (PDOException $erro) {
+			parent::gerarLog($erro);
+			$ingredientesQtd = null;
+		}
+		return $ingredientesQtd;
+	}
+
 	public function buscarPorId($id){
 		$produto = null;
 		$sql = "SELECT * FROM $this->table WHERE id = :id";
