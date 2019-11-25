@@ -56,16 +56,21 @@ class ReceitaDAO extends CrudDAO{
 		$sql = "SELECT r.id, r.nome, i.id, i.nome, qtdIngrediente as qtd from TbReceita r, TbReceitaIngrediente ri, TbIngrediente i where r.id = ri.idReceita and i.id = ri.idIngrediente and r.id = :id";
 		$registros = parent::__listarEspecifico($sql, $id);
 		$ingredienteDAO = new IngredienteDAO();
-		$receitaDAO = new ReceitaDAO();
 		if (isset($registros)) {
 			foreach ($registros as $registro){
 				$ingrediente = $ingredienteDAO->buscarPorId($registro['id']);
-				$ingrediente->setQuantidade($receitaDAO->getQuantidade($id, $ingrediente->getId()));
+				$ingrediente->setQuantidade($this->getQuantidade($id, $ingrediente->getId()));
 				$ingredientes[] = $ingrediente;
 			}	
 		}
 		return $ingredientes;
 	}
+
+	private function getQuantidade(int $idReceita, int $idIngrediente){
+		$sql = "SELECT qtdIngrediente from TbReceitaIngrediente where idReceita = :id1 and idIngrediente = :id2";
+		$registro = parent::__verificarExistenciaNN($sql, $idReceita, $idIngrediente);
+	}
+
 	public function buscarPorId($id){
 		$receita = null;
 		$sql = "SELECT * FROM $this->table WHERE id = :id";
