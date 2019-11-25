@@ -68,13 +68,14 @@ insert into TbReceitaIngrediente values
 drop table if exists TbProducao;
 create table if not exists TbProducao(
 	id int not null auto_increment,
-    dia varchar(2) not null,
-    mes varchar(10) not null,
-    ano varchar(4) not null,
+    dtProducao date not null,
     gastoTotal decimal(10,2) not null,
     primary key (id));
 insert into TbProducao values
-(null, 23, 'janeiro', 2019,);    
+(null,'2019/10/19', 7.8),
+(null,'2019/11/20', 17.88),
+(null,'2019/11/20', 6.24),
+(null,'2019/11/23', 15.36);    
 
 drop table TbProducaoProduto;
 create table if not exists TbProducaoProduto(
@@ -85,4 +86,11 @@ create table if not exists TbProducaoProduto(
     primary key (id),
     foreign key (idProduto) references TbProduto(id),
     foreign key (idProducao) references TbProducao(id));
+insert into TbProducaoProduto values
+(null, 1, 1, 5),
+(null, 4, 2, 7), 
+(null, 3, 2, 8), 
+(null, 1, 3, 4),
+(null, 4, 4, 7), 
+(null, 1, 4, 5);
    
