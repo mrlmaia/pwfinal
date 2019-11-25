@@ -29,8 +29,6 @@
 				<thead>
 					<tr>
 						<th scope="col">Sabor</th>
-						<th scope="col">Quantidade</th>
-						<th scope="col">Gasto Total</th>
 						<th scope="col"></th>
 					</tr>
 				</thead>
@@ -42,14 +40,8 @@
 										{$registro->getNome()}
 									</td>
 									<td>
-										{$registro->getQtd()}
-									</td>
-									<td>
-										{$registro->getGastoTotal()}
-									</td>
-									<td>
 										<td>
-											<a class='btn btn-danger float-right mx-1' href='relatorio.php?id={$registro->getNome()}'>Relatorio</a> 
+											<a class='btn btn-danger float-right mx-1' href='relatorio.php?nome={$registro->getNome()}'>Relatorio</a> 
 										</td>
 									</td>
 								</tr>";

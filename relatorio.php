@@ -2,7 +2,8 @@
 	<?php
 		ob_start();
 		require_once "mpdf/mpdf.php";
-		require_once "class/ProdutoDAO.class.php";
+		require_once "class/ProducaoDAO.class.php";
+		$nome = $_GET["nome"];
 		$mpdf = new mPDF();
 		$mpdf->SetDisplayMode("fullpage");	
 		$html = "<div id='area01'>
@@ -16,33 +17,23 @@
 						<table class='tabela'>
 							<thead>
 								<tr>
-									<th width='50%'>Produto</th>
-									<th width='20%'>Valor</th>
-									<th width='10%'>Quantidade</th>
-									<th width='10%'>Subtotal</th>
+									<th width='30%'>Produto</th>
+									<th width='30%'>Gasto total</th>
+									<th width='30%'>Quantidade</th>
 								</tr>
 							</thead>
 							<tbody>
 								";							
-		$produtoDAO = new ProdutoDAO();
-		$lista = $produtoDAO->listar();
+		$ProducaoDAO = new ProducaoDAO();
+		$produto = $ProducaoDAO->buscarPorSabor($nome);
 		$total = 0;
-		foreach($lista as $produto){
 			$html = $html . "<tr>";								
-			$html = $html .	"<td>{$produto->getDescricao()}</td>";
-			$html = $html .	"<td>R$ ".number_format($produto->getValor(), 2, ',', '.')."</td>";
-			$html = $html . "<td>{$produto->getQuantidade()}</td>";
-			$quant = $produto->getQuantidade();
-			$valor = $produto->getValor();
-			$subtotal = $quant * $valor;
-			$html = $html .	"<td>R$ ".number_format($subtotal, 2, ',', '.')."</td>";
-			$html = $html . "</tr>";
-			$total = $total + $subtotal;			
-		}		
+			$html = $html .	"<td>{$produto->getNome()}</td>";
+			$html = $html .	"<td>R$ ".number_format($produto->getGastoTotal(), 2, ',', '.')."</td>";
+			$html = $html . "<td>{$produto->getQtd()}</td>";
+			$html = $html . "</tr>";		
 						
 		$html = $html . "</tbody> </table> 
-		<th width='10%'>Total a pagar</th>
-		<td>R$ ".number_format($total, 2, ',', '.')."</td>
 		</div>";	
 		$dataEmissao = date("d/m/Y H:i:s");	
 		$css = file_get_contents('exercicio01.css');	

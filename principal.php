@@ -114,10 +114,10 @@
 
 	</script>
 
-	<canvas id="grafico-pizza"></canvas>
+	<!--<canvas id="grafico-pizza"></canvas>
 	<script>
 		var ctx = document.getElementById("grafico-comparativo")
-		<?php
+		<?php/*
 			// label
 			$nomes = array();
 			//data
@@ -129,13 +129,13 @@
 				$precosVenda[] = $produto->getPrecoVenda();
 				$precosCusto[] = $produto->getPrecoCusto();
 			}
-
+*/
 			
 		?>
 		
 
 	</script>
-
+		-->
 	<!--importar o jQuery.js antes do bootstrap.js-->
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
