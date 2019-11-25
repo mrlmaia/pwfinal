@@ -1,6 +1,6 @@
 drop schema if exists `trabalhoFinalPW`;
 CREATE SCHEMA IF NOT EXISTS `trabalhoFinalPW` DEFAULT CHARACTER SET utf8 ;
-USE `trabalhoFinalPW` ;
+USE `trabalhoFinalPW` 
 
 drop table if exists TbIngrediente;
 CREATE TABLE if not exists TbIngrediente (
@@ -64,13 +64,25 @@ insert into TbReceitaIngrediente values
 (2, 3, 0.25),
 (3,5,1.5),
 (3, 1, 0.35);
-select * from tbproduto;
--- SELECT * from TbProduto where idReceita = 2;
--- select qtdIngrediente from TbReceitaIngrediente ri;
--- SELECT i.id, qtdIngrediente from TbReceita r, TbReceitaIngrediente ri, TbIngrediente i where r.id = ri.idReceita and i.id = ri.idIngrediente and r.id = 1;
--- describe TbReceitaIngrediente;
--- select * from TbReceitaIngrediente;
--- INSERT INTO TbReceitaIngrediente values(8,2,9);
-select p.id, p.nome, precoCusto, precoVenda from TbProduto p inner join TbReceita r on p.IdReceita = r.id;
--- SELECT i.id, qtdIngrediente from TbProduto p, TbProdutoIngrediente pi, TbIngrediente i where p.id = pi.idProduto and i.id = pi.idIngrediente and p.id = 1;
--- select r.id, r.nome, i.id, i.nome, qtdIngrediente as qtd from TbReceita r, TbReceitaIngrediente ri, TbIngrediente i where r.id = ri.idReceita and i.id = ri.idIngrediente and r.id = 1;
+
+drop table if exists TbProducao;
+create table if not exists TbProducao(
+	id int not null auto_increment,
+    dia varchar(2) not null,
+    mes varchar(10) not null,
+    ano varchar(4) not null,
+    gastoTotal decimal(10,2) not null,
+    primary key (id));
+insert into TbProducao values
+(null, 23, 'janeiro', 2019,);    
+
+drop table TbProducaoProduto;
+create table if not exists TbProducaoProduto(
+	id int not null auto_increment,
+	idProduto int not null,
+    idProducao int not null,
+    qtdProduto int not null,
+    primary key (id),
+    foreign key (idProduto) references TbProduto(id),
+    foreign key (idProducao) references TbProducao(id));
+   
