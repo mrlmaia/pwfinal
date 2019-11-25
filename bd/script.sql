@@ -14,7 +14,8 @@ insert into TbIngrediente values
 (1,'leite 1L', 1.8, 20),
 (2,'Chocolate g', 0.04, 2000),
 (3,'Morango Bandeija', 3, 10),
-(4,'Leite moca', 3.5, 11);
+(4,'Leite moca', 3.5, 11),
+(5,'Coco ralado 10g', 0.3, 15);
 
 drop table if exists TbReceita;
 CREATE TABLE IF NOT EXISTS `TbReceita` (
@@ -26,7 +27,8 @@ ENGINE = InnoDB;
 
 insert into TbReceita values
 (1,'RCC Chocolate', 5),
-(2, 'RCC Morango', 3);
+(2, 'RCC Morango', 3),
+(3,'RCC Coco', 2.5);
 
 drop table if exists TbProduto;
 CREATE TABLE if not exists `TbProduto` (
@@ -40,11 +42,11 @@ CREATE TABLE if not exists `TbProduto` (
   foreign key (idReceita) references TbReceita(id) on delete set null
 );
 
-insert into TbProduto(nome, precoVenda, quantidade, idReceita) values 
-('CC Chocolate', 2.5, 5, 1), 
-('CC Blue Ice', 2, 7, null), 
-('CC Morango', 2.5, 6, 2), 
-('CC Coco', 2.5, 3, null);
+insert into TbProduto(nome, precoCusto, precoVenda, quantidade, idReceita) values 
+('CC Chocolate', 1.56, 3, 5, 1),
+('CC Blue Ice', null, 2, 7, null), 
+('CC Morango', 1.29, 2.5, 6, 2),
+('CC Coco', 1.08, 2.5, 3, 3);
 
 drop table if exists TbReceitaIngrediente;
 create table if not exists TbReceitaIngrediente(
@@ -57,17 +59,18 @@ create table if not exists TbReceitaIngrediente(
 
 insert into TbReceitaIngrediente values
 (1,1,0.2),
-(1,2,70),
+(1,2,30),
 (2,1,0.3),
-(2, 3, 0.25);
+(2, 3, 0.25),
+(3,5,1.5),
+(3, 1, 0.35);
+select * from tbproduto;
 -- SELECT * from TbProduto where idReceita = 2;
 -- select qtdIngrediente from TbReceitaIngrediente ri;
 -- SELECT i.id, qtdIngrediente from TbReceita r, TbReceitaIngrediente ri, TbIngrediente i where r.id = ri.idReceita and i.id = ri.idIngrediente and r.id = 1;
 -- describe TbReceitaIngrediente;
 -- select * from TbReceitaIngrediente;
 -- INSERT INTO TbReceitaIngrediente values(8,2,9);
--- select * from TbProduto where id not in(select p.id from TbProduto p inner join TbReceita r on p.IdReceita = r.id);
--- select * from TbProduto;
--- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+select p.id, p.nome, precoCusto, precoVenda from TbProduto p inner join TbReceita r on p.IdReceita = r.id;
 -- SELECT i.id, qtdIngrediente from TbProduto p, TbProdutoIngrediente pi, TbIngrediente i where p.id = pi.idProduto and i.id = pi.idIngrediente and p.id = 1;
 -- select r.id, r.nome, i.id, i.nome, qtdIngrediente as qtd from TbReceita r, TbReceitaIngrediente ri, TbIngrediente i where r.id = ri.idReceita and i.id = ri.idIngrediente and r.id = 1;

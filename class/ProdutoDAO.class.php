@@ -56,6 +56,28 @@ class ProdutoDAO extends CrudDAO{
 		}
 		return $produtos;
 	}
+	public function listarComPC(){
+		$produtos = null;
+		$sql = "SELECT p.id, p.nome, precoCusto, precoVenda from TbProduto p inner join TbReceita r on p.IdReceita = r.id ORDER BY p.nome";
+		$registros = parent::__listar($sql);
+		foreach ($registros as $registro){
+			$produto = new Produto(null,null,null);
+			$produto->setId($registro['id']);
+			$produto->setnome($registro['nome']);
+			$produto->setprecoVenda($registro['precoVenda']);
+			if (!empty($registro['quantidade'])) {
+				$produto->setQuantidade($registro['quantidade']);
+			}
+			if (!empty($registro['idReceita'])) {
+				$produto->setReceita($registro['idReceita']);
+			}
+			if ($registro['precoCusto'] != null) {
+				$produto->setPrecoCusto($registro['precoCusto']);
+			}
+			$produtos[] = $produto;
+		}
+		return $produtos;
+	}
 	public function listarEssesIngredientes(Produto $produto){
 		try {	
 		$ingredientes = null;
