@@ -8,9 +8,9 @@
         private $ingredientes;
         
         function __construct($nome, $rendimento) {
-            $this->setId(0);
-            $this->setNome($nome);
-            $this->setRendimento($rendimento);
+            $this->id = 0;
+            $this->nome = $nome;
+            $this->rendimento = $rendimento;
         }
         function __tooString(){
             return $this->nome;

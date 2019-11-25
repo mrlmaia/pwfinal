@@ -1,6 +1,6 @@
 /* VALIDACAO */
 $(document).ready(function() {
-    $('#quantidadeIngrediente').mask('######0');
+    $('#quantidadeIngrediente').mask('####0.00');
 });
 $("#formulario").validate({
     rules: {

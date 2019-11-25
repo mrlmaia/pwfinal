@@ -111,16 +111,17 @@ class ReceitaDAO extends CrudDAO{
 		$receita = new Receita(null, null);
 		$receita->setId($idReceita);
 		$precoCusto = 0;
+		echo $precoCusto;
 		$ingredientes = $this->listarEssesIngredientes($receita);
+		$produto = $this->listarEsseProduto($idReceita);
+		
 		if ($ingredientes != null) {
 			foreach ($ingredientes as $ingrediente) {
-				$precoCusto =+ $ingrediente->getQuantidade() * $ingrediente->getPreco();
+				$precoCusto += $ingrediente->getQuantidade() * $ingrediente->getPreco();
 			}	
 		}
-		$produto = $this->listarEsseProduto($idReceita);
-		$produto->setPrecoCusto(intval($precoCusto));
 		$produtoDAO = new ProdutoDAO();
-		$produtoDAO->atualizar($produto);
+		$produtoDAO->atualizarPrecoCusto($produto->getId(), $precoCusto);
 	}
 
 	private function verificaIngrediente($id){
@@ -144,12 +145,16 @@ class ReceitaDAO extends CrudDAO{
 	}
 
 	public function listarEsseProduto(int $idReceita){
-		$sql = "SELECT * from TbProduto where idReceita = :idReceita";
-		$registro = parent::__listarEspecifico($sql,$idReceita);
+		$sql = "SELECT * from TbProduto where idReceita = :id";
+		echo $sql;
+		$registros = parent::__listarEspecifico($sql, $idReceita);
 		$produtoDAO = new ProdutoDAO();
 		$produto = null;
-		if (isset($registro)) {
-			$produto = $produtoDAO->buscarPorId($registro['id']);
+		if (isset($registros)) {
+			foreach ($registros as $registro) {
+				$produto = $produtoDAO->buscarPorId($registro['id']);
+			}
+			
 		}
 		return $produto;
 	}

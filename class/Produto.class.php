@@ -57,7 +57,7 @@
             return $this->precoCusto;
         }
 
-        public function setPrecoCusto($precoCusto)
+        public function setPrecoCusto(float $precoCusto)
         {
             $this->precoCusto = floatval($precoCusto);
         } 

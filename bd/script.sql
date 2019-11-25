@@ -60,14 +60,14 @@ insert into TbReceitaIngrediente values
 (1,2,70),
 (2,1,0.3),
 (2, 3, 0.25);
-
+-- SELECT * from TbProduto where idReceita = 2;
 -- select qtdIngrediente from TbReceitaIngrediente ri;
 -- SELECT i.id, qtdIngrediente from TbReceita r, TbReceitaIngrediente ri, TbIngrediente i where r.id = ri.idReceita and i.id = ri.idIngrediente and r.id = 1;
 -- describe TbReceitaIngrediente;
 -- select * from TbReceitaIngrediente;
 -- INSERT INTO TbReceitaIngrediente values(8,2,9);
 -- select * from TbProduto where id not in(select p.id from TbProduto p inner join TbReceita r on p.IdReceita = r.id);
--- select * from TbIngrediente;
+-- select * from TbProduto;
 -- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 -- SELECT i.id, qtdIngrediente from TbProduto p, TbProdutoIngrediente pi, TbIngrediente i where p.id = pi.idProduto and i.id = pi.idIngrediente and p.id = 1;
 -- select r.id, r.nome, i.id, i.nome, qtdIngrediente as qtd from TbReceita r, TbReceitaIngrediente ri, TbIngrediente i where r.id = ri.idReceita and i.id = ri.idIngrediente and r.id = 1;

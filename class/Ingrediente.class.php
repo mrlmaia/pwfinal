@@ -21,7 +21,8 @@
                         return $this->nome;
                 }
                 public function setNome(String $nome)
-                {       if ($nome != null) {
+                {      
+                        if ($nome != null) {
                                 $this->nome = $nome;                
                         }
                 }

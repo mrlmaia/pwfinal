@@ -18,17 +18,4 @@
 		echo "<script>alert('Falha ao adicionar ingrediente!'); location.href='ingredienteReceitaFormulario.php?id={$idReceita}';</script>"; 
 	
 	}
-
-	function atualizarPrecoCusto($idReceita, $idIngrediente, $qtdIngrediente){
-		// listar todos os inredientes com sua respectivas qtd do respectivo produto
-		// preco de custo = ingredientes.precoun * qtd
-		$produtoDAO = new ProdutoDAO();
-		$receitaDAO = new ReceitaDAO();
-		$produto = $receitaDAO->listarEsseProduto($idReceita);
-		$essesIngredientesQtd = $produtoDAO->listarIngredientesQuantidades($produto);
-		foreach ($essesIngredientesQtd as $ingredienteQtd) {
-			echo "Ingrediente: " . $ingredienteQtd["ingrediente"]->getNome();
-			echo "Quantidade: " . $ingredienteQtd["qtdIngrediente"];
-		}
-	}
 ?>

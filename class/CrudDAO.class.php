@@ -81,7 +81,7 @@
 			return $registros;
 		}
 		
-		protected function __listarEspecifico(String $sql, int $id)
+		protected function __listarEspecifico(String $sql, int $id = 0) 
 		{
 			$registros = null;	
 			try{				

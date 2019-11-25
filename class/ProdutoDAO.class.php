@@ -17,7 +17,7 @@ class ProdutoDAO extends CrudDAO{
 		return $situacao;
 	}
 
-	public function atualizar(Produto $produto, $idReceita = null){
+	public function atualizar(Produto $produto, int $idReceita = 0){
 		$criterios = array(
 			"nome" => $produto->getNome(),
 			"precoVenda" => $produto->getPrecoVenda(),
@@ -49,6 +49,9 @@ class ProdutoDAO extends CrudDAO{
 			$produto->setprecoVenda($registro['precoVenda']);
 			$produto->setQuantidade($registro['quantidade']);
 			$produto->setReceita($registro['idReceita']);
+			if ($registro['precoCusto'] != null) {
+				$produto->setPrecoCusto($registro['precoCusto']);
+			}
 			$produtos[] = $produto;
 		}
 		return $produtos;
@@ -83,7 +86,7 @@ class ProdutoDAO extends CrudDAO{
 		try {	
 			$id = $produto->getId();
 			$sql = "SELECT i.id, qtdIngrediente from TbReceita r, TbReceitaIngrediente ri, TbIngrediente i where r.id = ri.idReceita and i.id = ri.idIngrediente and r.id = :id";
-			$registros = parent::__listarEspecifico($sql, $produto->getId);
+			$registros = parent::__listarEspecifico($sql, $id);
 			$ingredienteDAO = new IngredienteDAO();
 
 			if (isset($registros)) {
@@ -133,7 +136,15 @@ class ProdutoDAO extends CrudDAO{
 			"id" => $idProduto
 		);
 		$sql = "UPDATE $this->table SET idReceita = :idReceita WHERE id = :id";
-		echo $sql .$criterios["idReceita"]. $criterios["id"];
+		$situacao = parent::__atualizar($sql, $criterios);
+		return $situacao;
+	}
+	public function atualizarPrecoCusto($idProduto, $precoCusto){
+		$sql = "UPDATE $this->table SET precoCusto = :precoCusto where id = :id";
+		$criterios = array(
+			"precoCusto" => $precoCusto,
+			"id" => $idProduto
+		);
 		$situacao = parent::__atualizar($sql, $criterios);
 		return $situacao;
 	}
