@@ -18,7 +18,7 @@
 		$produtoDAO = new ProdutoDAO();
 		$produtos = $produtoDAO->listarComPC();
 	?>
-	<canvas id="grafico-comparativo" height="110%" weidth="80%"></canvas>	 
+	<canvas id="grafico-comparativo"></canvas>	 
 	
 	<script typ="text/javascript" src="js/Chart-2.7.1.js"></script>
 	<script>
@@ -26,6 +26,7 @@
 		<?php
 			// label
 			$nomes = array();
+			// data
 			$precosCusto = array();
 			$precosVenda = array();
 			
@@ -110,6 +111,28 @@
 				}
 			}
 		});
+
+	</script>
+
+	<canvas id="grafico-pizza"></canvas>
+	<script>
+		var ctx = document.getElementById("grafico-comparativo")
+		<?php
+			// label
+			$nomes = array();
+			//data
+			$quantidades = array();
+			
+			$produtos = $produtoDAO->listarProducoes();
+			foreach ($produtos as $produto) {
+				$nomes[] = $produto->getNome();
+				$precosVenda[] = $produto->getPrecoVenda();
+				$precosCusto[] = $produto->getPrecoCusto();
+			}
+
+			
+		?>
+		
 
 	</script>
 

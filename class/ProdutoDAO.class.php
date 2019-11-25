@@ -78,6 +78,19 @@ class ProdutoDAO extends CrudDAO{
 		}
 		return $produtos;
 	}
+
+	public function listarProducoes(){
+		$produtos = null;
+		$sql = "SELECT sum(qtdProduto) as 'soma', idProduto  from TbProducaoProduto group by idProduto";
+		$registros = parent::__listar($sql);
+		foreach ($registros as $registro){
+			$produto = $this->buscarPorId($registro["idProduto"]);
+			$quantidadeProduto = $registro["soma"];
+			$produtos[] = $produto;
+		}
+		return $produtos;
+	}
+
 	public function listarEssesIngredientes(Produto $produto){
 		try {	
 		$ingredientes = null;
