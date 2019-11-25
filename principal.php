@@ -18,7 +18,7 @@
 		$produtoDAO = new ProdutoDAO();
 		$produtos = $produtoDAO->listarComPC();
 	?>
-	<canvas id="grafico-comparativo"></canvas>	 
+	<canvas id="grafico-comparativo" height="110%" weidth="80%"></canvas>	 
 	
 	<script typ="text/javascript" src="js/Chart-2.7.1.js"></script>
 	<script>

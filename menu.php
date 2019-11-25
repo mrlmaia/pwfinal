@@ -14,5 +14,8 @@
 			<div class="navbar-nav">
 				<a class="nav-item nav-link" href="receitaTabela.php">Receitas</a>
 			</div>
+			<div class="navbar-nav">
+				<a class="nav-item nav-link" href="producaoTabela.php">Producao</a>
+			</div>
 		</div>
 	</nav>
