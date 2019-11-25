@@ -1,0 +1,41 @@
+.titulo{
+	color: red;	
+	text-align: center;
+}
+
+#area01{
+	float: left;
+	width: 10%;	
+}
+
+#area02{
+	float: left;
+	width: 80%;
+}
+
+#area03{
+	clear: both;
+	width: 100%;
+}
+
+.figura{
+	height: 80px;
+	width: 80px;
+}
+
+.tabela{
+	color: blue; 
+    width: 100%;	
+}
+
+.tabela th{
+	text-align: left;
+}
+
+.tabela tfoot .direita{
+	text-align: right;
+}
+
+.direita{
+	text-align: right;
+}
