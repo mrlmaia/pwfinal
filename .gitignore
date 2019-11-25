@@ -1,6 +1,6 @@
 *.zip
 .gitignore
 #roteiros
-/class/BancoDados.class.php
+BancoDados.class.php
 #logs
 logErro.txt

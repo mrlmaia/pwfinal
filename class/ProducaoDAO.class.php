@@ -11,7 +11,7 @@ class ProducaoDAO extends CrudDAO{
 			"data" => $producao->getData(),
 			"gastoTotal" => $producao->getGastoTotal()
 		);
-		$sql = "INSERT INTO $this->table(data, gastoTotal) VALUES(:data, :gastoTotal)";
+		$sql = "INSERT INTO $this->table(dtProducao, gastoTotal) VALUES(:data, :gastoTotal)";
 		$situacao = parent::__inserir($sql, $criterios, $producao);
 		return $situacao;
 	}
@@ -22,7 +22,7 @@ class ProducaoDAO extends CrudDAO{
 			"id" => $producao->getId(),
 			"gastoTotal" => $producao->getGastoTotal()
 		);
-		$sql = "UPDATE $this->table SET data = :data, gastoTotal = :gastoTotal WHERE id = :id";
+		$sql = "UPDATE $this->table SET dtProducao = :data, gastoTotal = :gastoTotal WHERE id = :id";
 		$situacao = parent::__atualizar($sql, $criterios);
 		return $situacao;
 	}
@@ -35,7 +35,7 @@ class ProducaoDAO extends CrudDAO{
 
 	public function listar(){
 		$Producaos = null;
-		$sql = "SELECT * FROM $this->table ORDER BY data";
+		$sql = "SELECT * FROM $this->table ORDER BY dtProducao";
 		$registros = parent::__listar($sql);
 		foreach ($registros as $registro){
 			$producao = new Producao(null,null);
@@ -47,10 +47,10 @@ class ProducaoDAO extends CrudDAO{
 		return $producoes;
 	}
 
-	public function listarPorMes(){
+	public function listarPorMes(int $mes){
 		$Producaos = null;
-		$sql = "SELECT * FROM $this->table group BY mes";
-		$registros = parent::__listar($sql);
+		$sql = "SELECT * from $this->table where month(dtProducao) = :mes";
+		$registros = parent::__listarEspecifico($sql, $mes);
 		foreach ($registros as $registro){
 			$producao = new Producao(null,null);
 			$producao->setId($registro['id']);
