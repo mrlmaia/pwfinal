@@ -3,16 +3,12 @@
 	class Producao
 	{
         private  $id;
-        private  $dia;
-        private  $mes;
-        private  $ano;
+        private  $data;
         private  $gastoTotal;
         
-        function __construct($dia, $mes, $ano, $gastoTotal) {
+        function __construct($data, $gastoTotal) {
             $this->setId(0);
-            $this->setDia($dia);
-            $this->setMes($mes);
-            $this->setAno($ano);
+            $this->setData($data);
             $this->setGastoTotal($gastoTotal); 
         }
 
@@ -24,28 +20,13 @@
             $this->id = intval($id);
         }
 
-        function getDia(){
-            return $this->dia;
+        function getData(){
+            return $this->data;
         }
 
-        function setDia($dia){
-            $this->dia = $dia;
+        function setData($data){
+            $this->data = $data;
         }   
-
-        function getMes(){
-            return $this->mes;
-        }
-        function setMes($mes){
-            $this->mes = $mes;
-        }  
-		
-        function getAno(){
-            return $this->ano;
-        }
-
-        function setAno($ano){
-            $this->ano = $ano;
-        }
 
         public function getGastoTotal(){
             return $this->gastoTotal;

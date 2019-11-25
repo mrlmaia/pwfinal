@@ -8,25 +8,21 @@ class ProducaoDAO extends CrudDAO{
 	private $table = 'TbProducao';
 	public function inserir($producao){
 		$criterios = array(
-			"mes" => $producao->getMes(),
-			"ano" => $producao->getAno(),
-			"dia" => $producao->getDia(),
+			"data" => $producao->getData(),
 			"gastoTotal" => $producao->getGastoTotal()
 		);
-		$sql = "INSERT INTO $this->table(dia, mes, ano, gastoTotal) VALUES(:dia, :mes, :ano, :gastoTotal)";
+		$sql = "INSERT INTO $this->table(data, gastoTotal) VALUES(:data, :gastoTotal)";
 		$situacao = parent::__inserir($sql, $criterios, $producao);
 		return $situacao;
 	}
 
 	public function atualizar($producao){
 		$criterios = array(
-			"dia" => $producao->getDia(),
-			"mes" => $producao->getmes(),
-			"ano" => $producao->getano(),
+			"data" => $producao->getData(),
 			"id" => $producao->getId(),
 			"gastoTotal" => $producao->getGastoTotal()
 		);
-		$sql = "UPDATE $this->table SET dia = :dia, mes =:mes, ano =:ano, gastoTotal = :gastoTotal WHERE id = :id";
+		$sql = "UPDATE $this->table SET data = :data, gastoTotal = :gastoTotal WHERE id = :id";
 		$situacao = parent::__atualizar($sql, $criterios);
 		return $situacao;
 	}
@@ -39,14 +35,12 @@ class ProducaoDAO extends CrudDAO{
 
 	public function listar(){
 		$Producaos = null;
-		$sql = "SELECT * FROM $this->table ORDER BY dia";
+		$sql = "SELECT * FROM $this->table ORDER BY data";
 		$registros = parent::__listar($sql);
 		foreach ($registros as $registro){
-			$producao = new Producao(null,null,null,null);
+			$producao = new Producao(null,null);
 			$producao->setId($registro['id']);
-			$producao->setdia($registro['dia']);
-			$producao->setmes($registro['mes']);
-			$producao->setano($registro['ano']);
+			$producao->setdata($registro['data']);
 			$producao->setGastoTotal($registro['gastoTotal']);
 			$producoes[] = $producao;
 		}
@@ -58,11 +52,9 @@ class ProducaoDAO extends CrudDAO{
 		$sql = "SELECT * FROM $this->table group BY mes";
 		$registros = parent::__listar($sql);
 		foreach ($registros as $registro){
-			$producao = new Producao(null,null,null,null);
+			$producao = new Producao(null,null);
 			$producao->setId($registro['id']);
-			$producao->setdia($registro['dia']);
-			$producao->setmes($registro['mes']);
-			$producao->setano($registro['ano']);
+			$producao->setdata($registro['data']);
 			$producao->setGastoTotal($registro['gastoTotal']);
 			$producoes[] = $producao;
 		}
@@ -73,11 +65,9 @@ class ProducaoDAO extends CrudDAO{
 		$producao = null;
 		$sql = "SELECT * FROM $this->table WHERE id = :id";
 		$registro = parent::__buscarPorId($sql, $id);
-		$producao = new producao(null,null,null,null);
+		$producao = new producao(null,null);
 		$producao->setId($registro['id']);
-		$producao->setdia($registro['dia']);
-		$producao->setmes($registro['mes']);
-		$producao->setano($registro['ano']);
+		$producao->setdata($registro['data']);
 		$producao->setGastoTotal($registro['gastoTotal']);
 		return $producao;
 	}

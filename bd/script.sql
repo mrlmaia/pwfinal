@@ -1,6 +1,6 @@
 drop schema if exists `trabalhoFinalPW`;
 CREATE SCHEMA IF NOT EXISTS `trabalhoFinalPW` DEFAULT CHARACTER SET utf8 ;
-USE `trabalhoFinalPW` 
+USE `trabalhoFinalPW` ;
 
 drop table if exists TbIngrediente;
 CREATE TABLE if not exists TbIngrediente (
@@ -77,7 +77,7 @@ insert into TbProducao values
 (null,'2019/11/20', 6.24),
 (null,'2019/11/23', 15.36);    
 
-drop table TbProducaoProduto;
+drop table if exists TbProducaoProduto;
 create table if not exists TbProducaoProduto(
 	id int not null auto_increment,
 	idProduto int not null,
