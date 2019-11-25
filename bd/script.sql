@@ -14,7 +14,7 @@ insert into TbIngrediente values
 (1,'leite 1L', 1.8, 20),
 (2,'Chocolate g', 0.04, 2000),
 (3,'Morango Bandeija', 3, 10),
-(4,'Leite moça', 3.5, 11);
+(4,'Leite moca', 3.5, 11);
 
 drop table if exists TbReceita;
 CREATE TABLE IF NOT EXISTS `TbReceita` (
@@ -61,7 +61,7 @@ insert into TbReceitaIngrediente values
 (2,1,0.3),
 (2, 3, 0.25);
 
- select qtdIngrediente from TbReceitaIngrediente ri;
+-- select qtdIngrediente from TbReceitaIngrediente ri;
 -- SELECT i.id, qtdIngrediente from TbReceita r, TbReceitaIngrediente ri, TbIngrediente i where r.id = ri.idReceita and i.id = ri.idIngrediente and r.id = 1;
 -- describe TbReceitaIngrediente;
 -- select * from TbReceitaIngrediente;

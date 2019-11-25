@@ -17,7 +17,7 @@ class ProdutoDAO extends CrudDAO{
 		return $situacao;
 	}
 
-	public function atualizar(Produto $produto, int $idReceita = null){
+	public function atualizar(Produto $produto, $idReceita = null){
 		$criterios = array(
 			"nome" => $produto->getNome(),
 			"precoVenda" => $produto->getPrecoVenda(),

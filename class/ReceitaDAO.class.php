@@ -67,8 +67,9 @@ class ReceitaDAO extends CrudDAO{
 	}
 
 	private function getQuantidade(int $idReceita, int $idIngrediente){
-		$sql = "SELECT qtdIngrediente from TbReceitaIngrediente where idReceita = :id1 and idIngrediente = :id2";
+		$sql = "SELECT qtdIngrediente as 'qtd' from TbReceitaIngrediente where idReceita = :id1 and idIngrediente = :id2";
 		$registro = parent::__verificarExistenciaNN($sql, $idReceita, $idIngrediente);
+		return $registro["qtd"];
 	}
 
 	public function buscarPorId($id){
@@ -100,9 +101,26 @@ class ReceitaDAO extends CrudDAO{
 			parent::gerarLog($erro);
 		}
 		if ($situacao) {
-			echo "true";
+			$this->atualizarPrecoCusto($idReceita);
 		}
 		return $situacao;
+	}
+
+	private function atualizarPrecoCusto(int $idReceita){
+		// preco de custo = soma(quant do ingrediente * quant na receita)
+		$receita = new Receita(null, null);
+		$receita->setId($idReceita);
+		$precoCusto = 0;
+		$ingredientes = $this->listarEssesIngredientes($receita);
+		if ($ingredientes != null) {
+			foreach ($ingredientes as $ingrediente) {
+				$precoCusto =+ $ingrediente->getQuantidade() * $ingrediente->getPreco();
+			}	
+		}
+		$produto = $this->listarEsseProduto($idReceita);
+		$produto->setPrecoCusto(intval($precoCusto));
+		$produtoDAO = new ProdutoDAO();
+		$produtoDAO->atualizar($produto);
 	}
 
 	private function verificaIngrediente($id){
@@ -141,21 +159,5 @@ class ReceitaDAO extends CrudDAO{
 		return $LAST_ID;
 	}
 
-	public function getQuantidade($idReceita, $idIngrediente){
-		
-		$sql = "SELECT r.id, r.nome, i.id, i.nome, qtdIngrediente as qtd from TbReceita r, TbReceitaIngrediente ri, TbIngrediente i where r.id = ri.idReceita and i.id = ri.idIngrediente and r.id = :id";
-		$registros = parent::__listarEspecifico($sql, $id);
-		$ingredienteDAO = new IngredienteDAO();
-		$receitaDAO = new ReceitaDAO();
-		if (isset($registros)) {
-			foreach ($registros as $registro){
-				$ingrediente = $ingredienteDAO->buscarPorId($registro['id']);
-				$ingrediente->setQuantidade($receitaDAO->getQuantidade($id, $ingrediente->getId()));
-				$ingredientes[] = $ingrediente;
-			}	
-		}
-		return $ingredientes;
-
-	}
 }
 ?> 
