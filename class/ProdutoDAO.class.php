@@ -56,6 +56,22 @@ class ProdutoDAO extends CrudDAO{
 		}
 		return $produtos;
 	}
+	public function listarPorSabor(){
+        $Producaos = null;
+        $sql = "SELECT nome, sum(qtdProduto)as qtd, sum(gastoTotal) as gastoTotal FROM tbProducao p, tbproducaoproduto pp, tbProduto pdt
+        where p.id = pp.idProducao
+        and pdt.id = pp.idProduto
+        group by nome";
+        $registros = parent::__listar($sql);
+        foreach ($registros as $registro){
+            $producao = new Registro(null,null,null);
+            $producao->setNome($registro['nome']);
+            $producao->setQtd($registro['qtd']);
+            $producao->setGastoTotal($registro['gastoTotal']);
+            $producoes[] = $producao;
+        }
+        return $producoes;
+    }
 	public function listarComPC(){
 		$produtos = null;
 		$sql = "SELECT p.id, p.nome, precoCusto, precoVenda from TbProduto p inner join TbReceita r on p.IdReceita = r.id ORDER BY p.nome";

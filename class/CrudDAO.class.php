@@ -148,6 +148,19 @@
 			$LAST_ID = $conexao->lastInsertId();
 			return $LAST_ID;
 		}
-
+		protected function __buscarPorSabor($sql, $nome){
+            $registro = null;
+            try{
+                $conexao = $this->conectar();   
+                $resultado = $conexao->prepare($sql);
+                $resultado->bindValue(':nome', $nome);
+                $resultado->execute();
+                $registro = $resultado->fetch();
+                $conexao = null;
+            }catch(PDOException $erro){
+                $this->gerarLog($erro);
+            }
+            return $registro;           
+        }
 	}
 ?> 
