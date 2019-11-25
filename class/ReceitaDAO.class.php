@@ -110,6 +110,7 @@ class ReceitaDAO extends CrudDAO{
 		// preco de custo = soma(quant do ingrediente * quant na receita)
 		$receita = new Receita(null, null);
 		$receita->setId($idReceita);
+		$receita = $this->buscarPorId($idReceita);
 		$precoCusto = 0;
 		echo $precoCusto;
 		$ingredientes = $this->listarEssesIngredientes($receita);
@@ -118,7 +119,8 @@ class ReceitaDAO extends CrudDAO{
 		if ($ingredientes != null) {
 			foreach ($ingredientes as $ingrediente) {
 				$precoCusto += $ingrediente->getQuantidade() * $ingrediente->getPreco();
-			}	
+			}
+			$precoCusto = $precoCusto / $receita->getRendimento();
 		}
 		$produtoDAO = new ProdutoDAO();
 		$produtoDAO->atualizarPrecoCusto($produto->getId(), $precoCusto);
@@ -146,7 +148,6 @@ class ReceitaDAO extends CrudDAO{
 
 	public function listarEsseProduto(int $idReceita){
 		$sql = "SELECT * from TbProduto where idReceita = :id";
-		echo $sql;
 		$registros = parent::__listarEspecifico($sql, $idReceita);
 		$produtoDAO = new ProdutoDAO();
 		$produto = null;

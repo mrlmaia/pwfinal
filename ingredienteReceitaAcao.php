@@ -4,8 +4,18 @@
         require_once 'class/' . $class_name .'.class.php';
 	}
 
-	// get id  receita 
+	# Request recebe via get e post
+	$funcao = $_REQUEST["action"];
+
+	if (function_exists($funcao)) {
+		call_user_func($funcao);
+	}
+
+
+	// post id  receita 
 	// adiciona o ingrediente na receita
+	function adicionar()
+	{
 	$idReceita = $_POST["id"];
 	$idIngrediente = $_POST["ingrediente"];
 	$qtdIngrediente = $_POST["quantidadeIngrediente"];
@@ -18,4 +28,6 @@
 		echo "<script>alert('Falha ao adicionar ingrediente!'); location.href='ingredienteReceitaFormulario.php?id={$idReceita}';</script>"; 
 	
 	}
+	}
+	
 ?>

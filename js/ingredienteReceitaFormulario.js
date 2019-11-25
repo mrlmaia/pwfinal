@@ -1,6 +1,6 @@
 /* VALIDACAO */
 $(document).ready(function() {
-    $('#quantidadeIngrediente').mask('####0.00');
+    $('#quantidadeIngrediente').mask('##0.00');
 });
 $("#formulario").validate({
     rules: {
@@ -16,8 +16,6 @@ $("#formulario").validate({
         }
     }
 });
-
-
 
 function doPost(formName, actionName) {
     console.log(formName)

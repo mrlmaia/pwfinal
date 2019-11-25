@@ -26,9 +26,9 @@ CREATE TABLE IF NOT EXISTS `TbReceita` (
 ENGINE = InnoDB;
 
 insert into TbReceita values
-(1,'RCC Chocolate', 5),
-(2, 'RCC Morango', 3),
-(3,'RCC Coco', 2.5);
+(1,'RCC Chocolate', 1),
+(2, 'RCC Morango', 1),
+(3,'RCC Coco', 1);
 
 drop table if exists TbProduto;
 CREATE TABLE if not exists `TbProduto` (

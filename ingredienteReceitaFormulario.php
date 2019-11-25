@@ -16,6 +16,8 @@
 		$id = $receita->getId();
 		$nomeReceita = $receita->getNome();
         $rendimento = $receita->getRendimento();
+        $produto = $receitaDAO->listarEsseProduto($id);
+        $precoCusto = $produto->getPrecoCusto();
         $_SESSION['ingredientes'] = $receitaDAO->listarEssesIngredientes($receita);
     } else {
         echo "<script>alert(\"Esse produto não contem receita\");location.href='produtoTabela.php';</script>";
@@ -52,9 +54,13 @@
                         <label for="nome">Nome</label>  
                         <input class="form-control" id="nome" name="nome" value="<?php echo $nomeReceita?>" type="text" readonly>
                     </div>							
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <label for="rendimento">Rendimento</label>
                         <input type="text" class="form-control"  name="rendimento" id="rendimento" value="<?php echo $rendimento?>" aria-describedby="helpId" readonly placeholder="Informe o preco do receitaa">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="precoCusto">Preco de custo (un)</label>
+                        <input type="text" class="form-control"  name="precoCusto" id="precoCusto" value="<?php if ($precoCusto != 0) {echo $precoCusto;}else{echo 0;}?>" aria-describedby="helpId" readonly placeholder="Informe o preco do receita">
                     </div>	
                 </div>			
                 <div class="row">
@@ -83,7 +89,7 @@
                         </div>
                     </div><!--// .panel -->
                 </div><!--// .col-md -->
-                <button id="btAdicionar" class="btn btn-primary">
+                <button id="btAdicionar" name="btAdicionar" class="btn btn-primary" onclick="doPost('formulario','adicionar')">
                     Adicionar Ingrediente
                 </button>        
             </fieldset>
