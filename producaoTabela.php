@@ -4,7 +4,7 @@
         require_once 'class/' . $class_name .'.class.php';
     }
     $producaoDAO = new ProducaoDAO();
-    $producoes = $producaoDAO->listarPorMes();	
+    $producoes = $producaoDAO->listarPorSabor();	
 ?>
 	
 
@@ -28,7 +28,9 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th scope="col">Mes</th>
+						<th scope="col">Sabor</th>
+						<th scope="col">Quantidade</th>
+						<th scope="col">Gasto Total</th>
 						<th scope="col"></th>
 					</tr>
 				</thead>
@@ -37,11 +39,17 @@
 						foreach($producoes as $key => $registro){
 							echo"<tr> 
 									<td>
-										{$registro->getMes()}
+										{$registro->getNome()}
+									</td>
+									<td>
+										{$registro->getQtd()}
+									</td>
+									<td>
+										{$registro->getGastoTotal()}
 									</td>
 									<td>
 										<td>
-											<a class='btn btn-danger float-right mx-1' href='relatorio.php?id={$registro->getMes()}'>Relatorio</a> 
+											<a class='btn btn-danger float-right mx-1' href='relatorio.php?id={$registro->getNome()}'>Relatorio</a> 
 										</td>
 									</td>
 								</tr>";
